@@ -1,0 +1,54 @@
+.box{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    padding: 30px;
+  
+  }
+  .one{
+    background-color: #a8c6e9;
+    color: black;
+    padding: 30px;
+  }
+  .line{
+    background-color:gray;
+    padding: 10px;
+  }
+  .total{
+    margin:25px 8% 30px 8%;
+    color: white;
+    background-color:gray ;
+    text-align: center;
+    padding: 17px 0;
+
+  }
+  .bank{
+    margin:5px 8% 20px 8%;
+    padding:2px   ;
+    color: white;
+    background-color:gray ;
+  }
+ .bankadd{
+     background-color: white;
+     color: black;
+     padding: 5px;
+  }
+  table, td, th {
+    border: 1px solid;
+    text-align: center;
+  }
+  th{
+    height: 40px;
+    color: white;
+  }
+  td{
+    height: 35px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  thead{
+    background-color:gray ;
+  }
+  tr:nth-child(even) {background-color: #f2f2f2;}

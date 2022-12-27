@@ -1,0 +1,36 @@
+<!-- sldsValidatorIgnore -->
+<template>
+
+    
+ 
+    <div class="slds-var-p-around_small">
+        <lightning-card>
+            <div style="padding-left:10px;">
+                <span style="float:left;font-size: 20px;"> Opportunities Tracking</span>
+            </div><br/>
+            <div class="slds-var-p-around_small">
+                <p style="display: inline-block"><lightning-button-stateful label-when-off="Add Opportunities Tracking" icon-name-when-off="utility:add" onclick={handleClick} class="my-button-create"> </lightning-button-stateful> </p>
+                <p style="display: inline-block;"><lightning-button-icon icon-name="action:delete" onclick={deleteMe} alternative-text="Delete" title="Delete"></lightning-button-icon></p>&ensp;&ensp;
+                <p style="display: inline-block;width:20%;"> <lightning-input placeholder="Search" onchange={cptrSearch}></lightning-input> </p>&ensp;
+                <p style="display: inline-block;"><lightning-icon icon-name="doctype:excel" onclick={exporToExcel} alternative-text="XML file" title="Export To Excel"></lightning-icon></p>
+                <p style="display: inline-block;"><lightning-button-icon icon-name="utility:refresh" onclick={refreshMe} alternative-text="refresh" title="Refresh"></lightning-button-icon></p>
+            </div>
+
+            <div class="slds-scrollable_x" style="clear:both;">
+                <div class="slds-text-longform" style="width:150%;">
+                    <lightning-datatable key-field="Id" columns={col} data={visibleRecords} onrowselection={handleRowSelection}></lightning-datatable>
+                </div>
+            </div>
+
+            <div class="slds-var-p-around_small">
+                <span>
+                    {recordStart}-{recordEnd} of {totalRecords} | Page {currentPage} of {totalPage}
+                </span>
+                <div style="float: right;">
+                    <lightning-button label="Previous" icon-name="utility:chevronleft" onclick={previousHandler} disabled={disablePrevious}></lightning-button>
+                    <lightning-button label="next" icon-name="utility:chevronright" icon-position="right" onclick={nextHandler} disabled={disableNext}></lightning-button>
+                </div>
+            </div>
+        </lightning-card>   
+    </div>
+</template>

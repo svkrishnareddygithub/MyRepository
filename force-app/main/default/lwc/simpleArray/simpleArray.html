@@ -1,0 +1,21 @@
+<template>
+    <lightning-card title="SimpleArray">
+        <template for:each={evNum} for:item="ev">
+            <p  key={ev}> {ev} </p>
+        </template>
+    <template iterator:item={evNum}>
+        <p key={item.value}>{item.value}</p>
+    </template>
+    </lightning-card>
+    <lightning-card title="complex JSON">
+        StudentName : {student.name} <br/>
+        StudentAge  : {student.age}
+    </lightning-card>
+    <lightning-card title="students">
+        <template for:each={students} for:item="s">
+            <p key={s}>Name: {s.name}
+            age: {s.age} </p>
+           
+        </template>
+    </lightning-card>
+</template>

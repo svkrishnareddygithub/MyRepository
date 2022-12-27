@@ -1,0 +1,11 @@
+<template>
+    <lightning-card>
+    <lightning-input label="Amount" onchange={amount} ></lightning-input>
+    <lightning-input label="Rate" onchange={rate} ></lightning-input>
+    <lightning-input label="Years" onchange={years}></lightning-input>
+    <lightning-input label="total" value={total} disabled="true"></lightning-input>
+
+    
+    <lightning-button label="submit" onclick={call}></lightning-button>
+</lightning-card>
+</template>

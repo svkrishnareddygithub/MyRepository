@@ -1,0 +1,22 @@
+<template>
+        <div class="head" style="padding: 1.5em;background:#0d5ed8">
+                <div class="slds-text-color_inverse" style="font-size:large;" >Opportunity Tracking Analytical Dashboard</div>
+        </div>
+        <div style="display:flex;align-items: center;"><button class="totalOpp" onclick={handleTotalOpps}>Total Opportunities {totalOppsCount}</button></div>
+       <lightning-layout>
+                <lightning-layout-item size="8">
+                        <lightning-card>
+                                <div class="chart slds-var-m-around_medium" lwc:dom="manual"></div>
+                        </lightning-card>
+                </lightning-layout-item>
+                <lightning-layout-item size="4"></lightning-layout-item>
+        </lightning-layout>
+        
+        <lightning-card>
+                <div class="slds-scrollable_x slds-var-p-around_large">
+                        <div class="slds-text-longform" style="width:150%;">
+                                <lightning-datatable key-field="Id" columns={col} data={visibleRecords}></lightning-datatable>
+                        </div>
+                </div>
+        </lightning-card>
+</template>

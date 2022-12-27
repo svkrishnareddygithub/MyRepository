@@ -1,0 +1,167 @@
+<!-- sldsValidatorIgnore -->
+<template>
+    <div style="background-color: rgb(0, 22, 57);height:10%;width:100%;background-image: radial-gradient(rgb(11, 92, 171),rgb(1, 68, 134),rgb(3, 45, 96),rgb(0, 22, 57), rgb(0, 22, 57));">
+        <div style="display: inline-block; padding-left:7%; height:100%;" >
+            <div > 
+                <i style="font-size:xx-large;color:white">Cloud Serveillance</i> <br/> 
+                <p style="padding-left:15%;font-size:small;color:white">We make your work better</p>
+            </div>
+        </div>
+        <div style="float:right;padding-right:3%;display:flex;align-items:center ;height:74.49px">
+            <div style="display:inline-block;" >
+                <input style="width:17.2rem;padding:7px;border-radius:6px;box-shadow:0 2px 4px rgb(65, 63, 63);border:none;" type="search" id="gsearch" placeholder="Search.."></input>
+            </div>&nbsp;
+            <div style="display:inline-block;">
+                <lightning-icon icon-name="utility:user" size="small" variant="bare" alternative-text="User" ></lightning-icon>
+            </div>
+        </div>
+    </div>
+    
+    <div style="position:absolute; background-color:rgb(255, 255, 255);height:100%;width:100%">
+        <div style="position:absolute;display: flex;height:90%;width:100%;margin-top:0.5%">
+            <div style="height:100%;width:15%">
+                <button  class="btn" data-my-id="unitid" onclick={unithandler}  >
+                    <img src={unitresource} >
+                </button><br/>
+                <button class="btn" data-my-id="companyid" onclick={companyhandler}>
+                    <img src={companysource}>
+                </button><br/>
+                <button class="btn" data-my-id="gaugeid" onclick={gaugehandler}>
+                    <img src={gaugesource} >
+                </button><br/>
+                <button class="btn" data-my-id="cartid" onclick={carthandler}>
+                    <img src={cartsource} >
+                </button><br/>
+                <button class="btn" data-my-id="trolleyid" onclick={trolleyhandler}>
+                    <img src={trolleysource} >
+                </button><br/>
+                <button class="btn" data-my-id="truckid" onclick={truckhandler}>
+                    <img src={trucksource} >
+                </button>
+            </div>
+
+            <div style="width:100%;">
+                <template  if:true={unitflag}>
+                            <span style="position:relative;height: 100%;width: 100%;top:20%;" >
+                                <lightning-layout multiple-rows style="padding-left: 0%;">
+                                    <lightning-layout-item size="5">
+                                        <img src={unitSelectionArrows} alt="" style="height: 300px;width:310px;float:right">
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="1" style="width: 10px;"> </lightning-layout-item>
+                                    <lightning-layout-item size="6" style="height: 300px;position:relative;">
+                                        <button data-my-id="btn1"  style="width: 50%;height:35px; border:2px solid #ba0517;text-align: center;border-radius:6px;position: absolute;bottom: 82%;left: 0;" onclick={productionUnit} value="Production Unit">
+                                            <div style="float: left;">
+                                                <span style="border: 1px solidrgb(131, 43, 43); border-radius:4px ;box-shadow:0px 1px 5px;text-align:center;background-color:white">
+                                                    <strong >&nbsp; M &nbsp;</strong>
+                                                </span>
+                                                <span style="border-right:1px solid #ba0517;margin-left: 10px;">
+                                                </span>
+                                            </div>
+                                            <span><strong>Production Unit</strong></span>
+                                        </button>
+                                        <br>
+                                        <button data-my-id="btn2"  style="width: 50%; height:35px; border:2px solid #ba0517;text-align: center;border-radius:6px;position: absolute;bottom: 47%;left: 0;" onclick={supplierUnit} value="Supplier Unit">
+                                            <div style="float: left;">
+                                                <span style="border: 1px solid #ba0517; border-radius:4px;box-shadow:0px 1px 5px; text-align:center;background-color:white">
+                                                    <strong >&nbsp;&nbsp; P &nbsp;</strong>
+                                                </span>
+                                                <span style="border-right:1px solid #ba0517;margin-left: 10px;">
+                                                </span>
+                                            </div>
+                                            <span><strong >Supplier Unit</strong></span>
+                                        </button>
+                                        <br>
+                                        <button data-my-id="btn3"  style="width: 50%;height:35px; border:2px solid #ba0517;text-align: center;border-radius:6px;position: absolute;bottom: 10%;left: 0;" onclick={deliveryUnit} value="Delivery Unit">
+                                            <div style="float: left;">
+                                                <span style="border: 1px solid #ba0517; border-radius:4px;box-shadow:0px 1px 5px;text-align:center;background-color:white">
+                                                    <strong >&nbsp;&nbsp; D &nbsp;</strong>
+                                                </span>
+                                                <span style="border-right:1px solid #ba0517;margin-left: 10px;">
+                                                </span>
+                                            </div>
+                                            <span><strong >Delivery Unit</strong></span>
+                                        </button>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </span>
+                </template>
+
+                <template if:true={companyflag}>
+                    <!-- <div style="position:absolute;height:100%;width:100%;"> -->
+                        <span style="position:relative;height: 100%;width: 100%;top:20%;" >
+                            <lightning-layout multiple-rows style="padding-left: 0%;">
+                                <lightning-layout-item size="5">
+                                    <img src={businessArrows} alt="" style="height: 390px;width:295px;float:right">
+                                </lightning-layout-item>
+                                <lightning-layout-item size="1" style="width: 10px;"> </lightning-layout-item>
+                                <lightning-layout-item size="6" style="height: 390px;position:relative;">
+                                    
+                                    <button data-my-id="btn1"  style="position: absolute;bottom: 89%;left: 0;width: 50%;height:35px;border:2px solid rgb(131, 43, 43);text-align: center;border-radius:6px;" value="Andhra Pradesh">
+                                        <div style="float: left; ">
+                                            <span style="border: 1px solid rgb(131, 43, 43); border-radius:4px ;box-shadow:0px 1px 5px;text-align:center;background-color:white">
+                                                <strong >&nbsp; M &nbsp;</strong>
+                                            </span>
+                                            <span style="border-right:1px solid rgb(131, 43, 43);margin-left: 10px;">
+                                            </span>
+                                        </div>
+                                        <span><strong>Andhra Pradesh</strong></span>
+                                    </button>
+                                    <br>
+                                    <button data-my-id="btn2" style="position: absolute;bottom: 67%;left: 0;" class="buttonsExecept1st" value="Telangana">
+                                        <div style="float: left;">
+                                            <span style="border: 1px solid rgb(131, 43, 43); border-radius:4px;box-shadow:0px 1px 5px; text-align:center;background-color:white">
+                                                <strong >&nbsp;&nbsp; M &nbsp;</strong>
+                                            </span>
+                                            <span style="border-right:1px solid rgb(131, 43, 43);margin-left: 10px;">
+                                            </span>
+                                        </div>
+                                        <span><strong >Telangana</strong></span>
+                                    </button>
+                                    <br>
+                                    <button data-my-id="btn3" style="position: absolute;bottom: 46%;left: 0;"  class="buttonsExecept1st" value="Tamil Nadu">
+                                        <div style="float: left;">
+                                            <span style="border: 1px solid rgb(131, 43, 43); border-radius:4px;box-shadow:0px 1px 5px;text-align:center;background-color:white">
+                                                <strong >&nbsp;&nbsp; P &nbsp;</strong>
+                                            </span>
+                                            <span style="border-right:1px solid rgb(131, 43, 43);margin-left: 10px;">
+                                            </span>
+                                        </div>
+                                        <span><strong >Tamil Nadu</strong></span>
+                                    </button>
+                                    <br>
+                                    <button data-my-id="btn4" style="position: absolute;bottom: 24.5%;left: 0;" class="buttonsExecept1st" value="Kerala">
+                                        <div style="float: left; ">
+                                            <span style="border: 1px solid rgb(131, 43, 43); border-radius:4px ;box-shadow:0px 1px 5px;text-align:center;background-color:white">
+                                                <strong >&nbsp; D &nbsp;</strong>
+                                            </span>
+                                            <span style="border-right:1px solid rgb(131, 43, 43);margin-left: 10px;">
+                                            </span>
+                                        </div>
+                                        <span><strong>Kerala</strong></span>
+                                    </button>
+                                    <br>
+                                    <button data-my-id="btn5" style="position: absolute;bottom: 2.8%;left: 0;" class="buttonsExecept1st" value="Goa">
+                                        <div style="float: left; ">
+                                            <span style="border: 1px solid rgb(131, 43, 43); border-radius:4px ;box-shadow:0px 1px 5px;text-align:center;background-color:white">
+                                                <strong >&nbsp; M &nbsp;</strong>
+                                            </span>
+                                            <span style="border-right:1px solid rgb(131, 43, 43);margin-left: 10px;">
+                                            </span>
+                                        </div>
+                                        <span><strong>Goa</strong></span>
+                                    </button>   
+                                    
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </span>
+                    <!-- </div> -->
+                </template>
+                <div class="buttons" >
+                    <lightning-button label="Previous" onclick={prevHandler} variant="destructive" disabled={hidePrevious} ></lightning-button>&nbsp;
+                    <lightning-button label="Next" onclick={nextHandler} disabled={hideNext} variant="destructive"></lightning-button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</template> 

@@ -1,0 +1,262 @@
+<!-- sldsValidatorIgnore -->
+<template>
+    <template if:true={listviewflag}>
+        <div class="slds-var-p-around_small">
+            <lightning-card>
+                <div style="padding-left:10px;">
+                    <span style="float:left;font-size: 20px;">Order Registration</span>
+                </div><br />
+                <div class="slds-var-p-around_small">
+                    <p style="display: inline-block">
+                        <lightning-button-stateful label-when-off="Add Order Registraion"
+                            icon-name-when-off="utility:add" onclick={handleClick} class="my-button-create">
+                        </lightning-button-stateful>
+                    </p>
+                    <p style="display: inline-block;">
+                        <lightning-button-icon icon-name="action:delete" onclick={deleteMe} alternative-text="Delete"
+                            title="Delete"></lightning-button-icon>
+                    </p>&ensp;&ensp;
+                    <p style="display: inline-block;width:20%;">
+                        <lightning-input placeholder="Search" onchange={cptrSearch}></lightning-input>
+                    </p>&ensp;
+                    <p style="display: inline-block;">
+                        <lightning-icon icon-name="doctype:excel" onclick={exporToExcel} alternative-text="XML file"
+                            title="Export To Excel"></lightning-icon>
+                    </p>
+                    <p style="display: inline-block;">
+                        <lightning-button-icon icon-name="utility:refresh" onclick={refreshMe}
+                            alternative-text="refresh" title="Refresh"></lightning-button-icon>
+                    </p>
+                </div>
+
+                <div class="slds-scrollable_x" style="clear:both;">
+                    <div class="slds-text-longform" style="width:150%;">
+                        <lightning-datatable key-field="Id" columns={col} data={visibleRecords}
+                            onrowselection={handleRowSelection} onrowaction={handleRowAction}></lightning-datatable>
+                    </div>
+                </div>
+
+                <div class="slds-var-p-around_small">
+                    <span>
+                        {recordStart}-{recordEnd} of {totalRecords} | Page {currentPage} of {totalPage}
+                    </span>
+                    <div style="float: right;">
+                        <lightning-button label="Previous" icon-name="utility:chevronleft" onclick={previousHandler}
+                            disabled={disablePrevious}></lightning-button>
+                        <lightning-button label="next" icon-name="utility:chevronright" icon-position="right"
+                            onclick={nextHandler} disabled={disableNext}></lightning-button>
+                    </div>
+                </div>
+            </lightning-card>
+        </div>
+    </template> 
+
+    <template if:true={invoiceflag}>
+        <div class="slds-var-p-around_small" style="margin: 25px 25px 25px 25px;">
+            <lightning-card>
+                <div  style="padding: 15px 50px 40px 20px;">
+                    <span style="float:left;font-size: 20px;"> Generate Invoice(Create)</span>
+                    <span style="float:right;font-size: 15px;">Date Created : {today}&ensp;<lightning-icon size="small" icon-name="action:back" onclick={backbuttonhandler}></lightning-icon></span>
+                </div>
+                
+            <div style="margin:10px 30px 10px 30px">
+                <lightning-card>
+                    <div class="slds-grid">
+                        <div class="slds-col">
+                            <span>Project No<br/> {row.Name}</span>
+                        </div>
+                        <div class="slds-col">
+                            <span>SaaS Solution Owner Division<br/>{row.SaaS_Solution_Owner_Division__c}</span>
+                        </div>
+                        <div class="slds-col">
+                            <span>Saas Subscriber<br/> {row.Subscriber}</span>
+                        </div>
+                        <div class="slds-col">
+                            <span>SaaS Annual Fee<br/>{row.Annual_Fee__c}</span>
+                        </div>
+                        <div class="slds-col">
+                            <span>Project No<br/>{row.SaaS_Subscription_Start_Date__c}</span>
+                        </div>
+                        <div class="slds-col">
+                            <span>PaaS Subscription Termination<br/>{row.PaaS_Subscription_Termination__c}</span>
+                        </div>
+                        <div class="slds-col">
+                            <span>Status<br/>{row.Status__c}</span>
+                        </div>
+                    </div>
+                </lightning-card>
+            </div>
+
+            <lightning-card>
+                <div class="box">
+                    <lightning-input value={row.Order_Type__c} label="Order Type" disabled></lightning-input>
+                    <lightning-input value={row.Project_Name__c} label="Project Name" disabled></lightning-input>
+                    <lightning-input value={row.Project_PO_number__c} label="Project PO number" disabled>
+                    </lightning-input>
+                    <lightning-input value={row.PO_Amount__c} label="PO Amount" disabled></lightning-input>
+                    <lightning-input value={row.SaaS_Payment_Term__c} label="SaaS Payment Term" disabled>
+                    </lightning-input>
+                    <lightning-input value={row.SaaS_Subscription_Start_Date__c} label="SaaS Subscription Start Date"
+                        disabled></lightning-input>
+                    <lightning-combobox name="SaaS Service Term Duration" label="SaaS Service Term Duration"
+                        onchange={ssTermDurationHandler} value={row.SaaS_Service_Term_Duration__c}
+                        options={sspicklistvalues.data.values} disabled></lightning-combobox>
+                    <lightning-combobox name="SaaS Payment Term" label="SaaS Payment Term"
+                        onchange={saasPaymentTermHandler} value={row.SaaS_Payment_Term__c}
+                        options={ssPayTermOptions.data.values} disabled></lightning-combobox>
+                    <lightning-input value={ssTerminationDate} label="PaaS Subscription Termination" disabled>
+                    </lightning-input>
+                    <lightning-input value={row.PO_Amount__c} label="PO Amount" disabled></lightning-input>
+                    <lightning-input value={duedate} label="Due Date" disabled></lightning-input>
+                    <lightning-input value={yearlyAmount} label="Total Amount" disabled></lightning-input>
+                </div>
+            </lightning-card>
+            
+                <template if:true={invflag}>
+                    <lightning-datatable key-field="Id" columns={invcol} data={invoiceList} onrowaction={generatePdf}>
+                    </lightning-datatable>
+                </template>
+            </lightning-card>
+        </div>
+    </template>
+
+    <template if:true={pdfflag}>
+        <div style="margin:50px 10% 50px 10%">
+            <lightning-card>
+                <lightning-icon class="slds-no-print" size="x-small" icon-name="action:back" onclick={backbuttonhandlerinvoice}></lightning-icon>
+                <div style="padding-left: 8%;padding-right:8%">
+                    <div class="slds-clearfix" style="border-bottom: 2px solid gray">
+                        <div class="slds-float_left">
+                            <p style="font-size: 30px;">INVOICE</p>
+                        </div>
+                        <div class="slds-float_right">
+                            <p>INVOICE No: {invoicerow.Invoice_No__c}</p>
+                            <p>INVOICE DATE : {today}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="padding-left: 35%;padding-top:10px">
+                    <p style="font-size: 20px;">Yokogawa Electric Corporation</p>
+                    <p>2-9-32, Nakacho,</p>
+                    <p>Musashino-cityTokyo</p>
+                    <p>1808750</p><br />
+                    <p>Attention to:</p>
+                    <p>TEL:0422-52-8824</p>
+                    <p>FAX:0422-52-7048</p>
+                    <p>Department: D-SolHQ DX Platform Center.</p><br />
+                    <p>Contact Person: Minoru Morita</p>
+                    <p>Company Reg No:</p>
+                    <p>TAX Reg No:</p>
+                </div>
+
+                <div class="total">
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-size_2-of-12">
+                            <span>Total</span>
+                        </div>
+                        <div class="slds-col slds-size_3-of-12">
+                            <span>{invoicerow.Total_Amount__c}</span>
+                        </div>
+                        <div class="slds-col slds-size_1-of-12">
+                            <span>USD</span>
+                        </div>
+                        <div class="slds-col slds-size_3-of-12">
+                            <span>Payment Due Date</span>
+                        </div>
+                        <div class="slds-col slds-size_3-of-12">
+                            <span>{invoicerow.Due_Date__c}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bank">
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-size_3-of-12" style="text-align: center;padding:25px 0;">
+                            <span>Bank Details</span>
+                        </div>
+                        <div class="slds-col slds-size_9-of-12 bankadd">
+                            <span>Bank: 0005 MUFG Bank, Ltd. 001 Head Office<br />
+                                Account: 001-0191906 Beneficiary: Yokogawa Electric Corporation<br />
+                                Swift Code: BOTKJPJT<br />
+                                Address of Bank: 2-7-1 Marunouchi Chiyoda-ku Tokyo Japan 100-8388<br />
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="padding-left: 8%;padding-right:8%">
+                    <span style="font-size: 15px;">Description</span><br />
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Description</th>
+                                <th>Base Price</th>
+                                <th>Tax</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Cloud usage ({invoicerow.Start_Date__c} to {invoicerow.End_Date__c}) for New
+                                    platform</td>
+                                <td>{invoicerow.Total_Amount__c}</td>
+                                <td>0</td>
+                                <td>{invoicerow.Total_Amount__c}</td>
+                            </tr>   
+                        </tbody>
+                    </table>
+
+                    <div style="width: 50%;margin:20px 0px 20px auto;border: 1px solid;">
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td>Sub Total</td>
+                                <td>{invoicerow.Total_Amount__c}</td>
+                            </tr>
+                            <tr>
+                                <td>Tax</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>Total</td>
+                                <td>{invoicerow.Total_Amount__c}</td>
+                            </tr></tbody>
+                        </table>
+                    </div>
+
+                    <span style="font-size: 15px;">Remarks</span><br />
+                    <div class="slds-grid slds-wrap" style="border:2px solid;">
+                        <div style="margin: 10px auto 10px 10px;">
+                            <span>
+                                New platform ()<br />
+                                SaaS subscription Date&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;:&ensp;
+                                {row.SaaS_Subscription_Start_Date__c}<br />
+                                SaaS Service Term Duration&ensp;&ensp;&ensp;&ensp;&ensp;: &ensp;
+                                {invoicerow.SaaS_Service_Term_Duration__c}<br />
+                                Subscription Termination Date&nbsp;&ensp;&ensp;:&ensp; {ssTerminationDate}<br />
+                            </span>
+                        </div>
+                    </div>
+
+                    <div style="border-bottom: 3px solid gray;padding-bottom:5px;">
+                        <div style="margin-top:30px ;margin-left:60%;border-bottom-style:dashed;">
+                            Signature
+                        </div>
+                    </div>
+                    
+                    <div style=" padding:10px 10% 10px 90%; font-size: 20px;">
+                         YOKOGAWA
+                    </div>
+
+                    <div style=" padding:10px 0px 10px 98%;" class="slds-no-print">
+                        <lightning-button-icon icon-name="action:download" onclick={downloadme}
+                            alternative-text="Download" title="Download" variant="brand"></lightning-button-icon>
+                    </div>
+                </div>
+            </lightning-card>
+        </div>
+    </template>
+</template>

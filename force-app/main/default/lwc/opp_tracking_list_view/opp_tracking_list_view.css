@@ -1,0 +1,9 @@
+.my-button-create {
+    --sds-c-button-neutral-color-background: rgb(10, 12, 141);
+    --sds-c-button-text-color: white;
+}
+.my-button-delete {
+    background-color: rgba(255, 1, 1, 0.644);
+    color: white;
+   /*  --sds-c-button-text-color: white; */
+}

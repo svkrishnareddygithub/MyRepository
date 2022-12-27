@@ -1,0 +1,10 @@
+<template>
+    <lightning-card title="LWC Create record using LDS">
+        <lightning-input label="Name" onchange={capture} name="name" value={accName}></lightning-input>
+        <lightning-input label="Rating" onchange={capture}  name="rating" value={accRating}></lightning-input>
+        <lightning-input label="Phone" onchange={capture} name="phone" value={accPhone}></lightning-input>
+        <lightning-input label="Industry" onchange={capture} name="industry" value={accIndustry}></lightning-input>
+        <lightning-button label="save" onclick={create} ></lightning-button>
+        <lightning-button label="reset"  onclick={reset}></lightning-button>
+    </lightning-card>
+</template> 

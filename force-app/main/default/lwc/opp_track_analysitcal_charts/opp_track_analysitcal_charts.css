@@ -1,0 +1,11 @@
+.totalOpp{
+    background-color: #fff562;
+    color: rgb(0, 0, 0);
+    width: 66%;
+    padding: 20px ;
+    margin: 10px;
+    font-size: large;
+    font-weight: 30px;
+    border: 2px solid red;
+    border-radius: 10px;
+}

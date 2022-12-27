@@ -1,0 +1,293 @@
+<template>
+ 
+    <div  style="padding: 15px 50px 40px 20px;">
+        <span style="float:left;font-size: 20px;"> Opportunities Tracking (Create)</span>
+        <span style="float:right;font-size: 15px;">Date Created : {today}&ensp;<lightning-icon size="small" icon-name="action:back"></lightning-icon></span>
+    </div>
+ 
+    <div class="slds-p-around_large">
+      <lightning-card >
+
+        <div class="slds-var-p-horizontal_medium">
+         <div class="head slds-box slds-box_xx-small" style="padding: 1em;background:#0d5ed8">
+            <div class="slds-text-color_inverse" style="font-size:medium;" >Customer Info</div>
+         </div>
+        </div>
+
+        <lightning-layout class="box">
+            
+            <lightning-input label="Customer" onchange={capturecustomerName} placeholder="Customer" required="true"></lightning-input>
+            <lightning-input label="Opportunity Info" type="text" placeholder="Opportunity Info" onchange={captureOppInfo} ></lightning-input>
+            <template if:true={sourceData.data}>
+                <lightning-combobox 
+                    name="source"
+                    label="Source"
+                    onchange={sourceHandler}
+                    value={selectedSource}
+                    options={sourceData.data.values}
+                    required="true"
+                    ></lightning-combobox>
+            </template>
+            <template if:true={showSalesRegpicklist}>
+                  <lightning-combobox label="Sales Region"
+                                                name="Sales Region"
+                                                options={salesRegPickList} 
+                                                value={selectedSalesReg}
+                                                onchange={cptrSalesReg}
+                                                required="true"
+                                                >
+                  </lightning-combobox>
+            </template>
+            <template if:true={showdependent}>
+                <lightning-combobox label="Sub Sales Region"
+                                                name="Sub Sales Region"
+                                                options={finalDependentVal} 
+                                                value={selectedSubSalesReg}
+                                                onchange={cptrSubSalesReg}
+                                                disabled={dependentDisabled}                                    
+                                                >
+                </lightning-combobox>
+            </template>
+            <lightning-input label="Opportunity Start" type="date" onchange={captureOppStart} placeholder="MM-DD-YYYY"></lightning-input>
+            <lightning-input label="Saeles Contact" type="text"  onchange={cptrSalesCon} placeholder="Sales Contact" ></lightning-input>
+            <lightning-input label="BD Contact" type="text" onchange={cptrBDCon} placeholder="BD Contact"></lightning-input>     
+            <lightning-input label="Comments" type="text"  onchange={cprtComment} placeholder="Comments"></lightning-input>
+        </lightning-layout>
+      </lightning-card>
+    </div>
+    
+   <div class="slds-var-p-around_large">
+    <lightning-card >
+        
+          <div class="slds-var-p-horizontal_medium">
+            <div class="head slds-box slds-box_xx-small" style="padding: 1em;background:#0d5ed8">
+               <div class="slds-text-color_inverse" style="font-size:medium;" >Opportunity Info</div>
+            </div>
+          </div>
+
+        <lightning-layout class="box">
+                <template if:true={opType.data}>
+                    <lightning-combobox
+                         name="Opportunity Type"
+                         label="Opportunity Type"
+                         onchange={cptrOpType}
+                         value={opprtType}
+                         options={opType.data.values}>
+                    </lightning-combobox>
+                </template>
+                <template if:true={salesStatus.data}>
+                    <lightning-combobox 
+                                      name="Sales Status"
+                                      label="Sales Status"
+                                      onchange={cptrSalesStatus}
+                                      value={sStatus}
+                                      options={salesStatus.data.values}
+                                      required="true">
+                    </lightning-combobox>
+                </template>
+                <template if:true={currency.data}>
+                    <lightning-combobox 
+                                      name="Currency Type"
+                                      label="Currency Type"
+                                      onchange={cptrCurrencyType}
+                                      value={CurrencyType}
+                                      options={currency.data.values}>
+                    </lightning-combobox>
+                </template>
+                <template if:true={convRateTrueFalse}>
+                    <lightning-input label="Conversion Rate" value={rate} onchange={cptrConvRate} disabled ></lightning-input>
+                </template>
+
+                <template if:true={locPoCEstValTrueFalse}>
+                    <lightning-input label="Local Estimated Value (PoC)" type="number" value={LocEstValuePoC} onchange={cptrLocEstValuePoC} placeholder="Local Estimated Value (PoC)"></lightning-input>
+                </template>
+                <template if:true={locProEstValTrueFalse}>
+                    <lightning-input label="Local Estimated Value (PRO)" type="number" value={LocEstValuePro} onchange={cptrLocEstValuePro} placeholder="Estimated Value (Project)"></lightning-input>
+                </template>
+                <template if:true={estValPoCTrueFalse}>
+                  <lightning-input label="Estimated Value (PoC)" type="number"  value={EstValuePoC} onchange={cptrEstValuePoC} placeholder="Estimated Value (PoC)"></lightning-input>
+                </template>
+                <template if:true={estValProTrueFalse}>
+                  <lightning-input label="Estimated Value (Project)" type="number" value={EstValuePro} onchange={cptrEstValuePro} placeholder="Estimated Value (Project)"></lightning-input>
+                </template>
+
+                <lightning-input label="Rough Business Volume" type="text" onchange={cptrRoughBusVol} placeholder="Rough Business Volume"></lightning-input>
+                <lightning-input label="SaaS Revenue (USD)" type="currency" onchange={cptrSaasRev} placeholder="SaaS Revenue (USD)"></lightning-input>
+                <lightning-input label="Forecast" type="Date" onchange={cptrForecast} placeholder="MM-DD-YYYY"></lightning-input>
+                <template if:true={chance.data}>
+                    <lightning-combobox 
+                                      name="Chance"
+                                      label="Chance"
+                                      onchange={cptrChance}
+                                      value={selectedChance}
+                                      options={chance.data.values}>
+                    </lightning-combobox>
+                </template>
+                <lightning-input label="OneSMS OpportunityID" type="Text" onchange={cptrSmsOpt} placeholder="OneSMS OpportunityID"></lightning-input>
+                <template if:true={bhq.data}>
+                    <lightning-combobox 
+                                      name="BHQ"
+                                      label="BHQ"
+                                      onchange={cptrBHQ}
+                                      options={bhq.data.values}
+                                      placeholder="BHQ">
+                    </lightning-combobox>
+                </template>                
+                <lightning-input label="DXP Proposal Ref Number" type="text" onchange={cptrRefNum} placeholder="DXP Proposal Ref Number"></lightning-input>
+        </lightning-layout>
+    </lightning-card>
+   </div>
+
+  <!-- App and Technologies fields -->
+   <div class="slds-var-p-around_large">
+    <lightning-card >
+        
+        <div class="slds-var-p-horizontal_medium">
+            <div class="head slds-box slds-box_xx-small" style="padding: 1em;background:#0d5ed8">
+               <div class="slds-text-color_inverse" style="font-size:medium;" >App Registration</div>
+            </div>
+        </div>
+
+                <template if:true={hostingData.data}>
+                     <lightning-combobox
+                               name="Hosting"
+                               label="Hosting"
+                               onchange={cptrHosting}
+                               options={hostingData.data.values}
+                               class="slds-var-p-around_large">
+                     </lightning-combobox>
+               </template>
+               
+               <div class="slds-var-p-horizontal_x-large">
+                 <div class="slds-grid slds-border_bottom ">
+                    <div class="slds-col slds-size_1-of-3 slds-var-p-left_xx-large">
+                        <span>App</span>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <span>Technologies</span>
+                    </div>
+                  </div>
+               </div>
+        <div class="slds-var-p-around_large">
+            <div class="slds-grid slds-wrap">
+                <div class="slds-size_1-of-3">
+                    <template if:true={appData.data}>
+                        <lightning-combobox
+                                    data-id="appId"
+                                    value={selectedApp}
+                                    onchange={cptrApp}
+                                    options={appData.data.values}
+                                    class="slds-var-p-around_large">
+                        </lightning-combobox>
+                    </template>
+                </div>
+                <div class="slds-size_1-of-3">
+                        <lightning-dual-listbox name="Technologies"
+                                                    label="Select Technologies"
+                                                    source-label="Available"
+                                                    selected-label="Selected"
+                                                    field-level-help="Select your preferred languages"
+                                                    options={techValues}
+                                                    value={selectedtechValuesArray}
+                                                    onchange={cptrTech}>
+                        </lightning-dual-listbox>
+                        <template if:true={selectedtechValues}>
+                            <template for:each={selectedtechValues} for:item="sel">
+                                    <p key={sel}></p>
+                            </template>
+                        </template>
+                </div>
+                <div class="slds-size_1-of-3">
+                   <lightning-icon   
+                                icon-name="utility:add"      
+                                alternative-text="Add"     
+                                size="small"
+                                onclick={addOneMoreService} 
+                                title="Add">
+                            </lightning-icon>
+                </div>
+            </div>
+        </div>
+        
+        <!-- List App and Technologies Table  -->
+    <div class="slds-var-p-horizontal_medium">
+         <table class="slds-table slds-table_cell-buffer slds-table_bordered" aria-labelledby="element-with-table-label other-element-with-table-label">
+            <thead>
+                <tr class="slds-line-height_reset">
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="App">App</div>
+                    </th>
+                
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Technologies">Technologies</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Technologies">Action</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={multipleServiceTech} for:item="item" for:index="indx">
+                    <tr class="slds-hint-parent" key={item.Id} id={item.Id}>
+                        <td data-label="App">
+                            <div class="slds-truncate" title="Cloudhub" data-id={indx}>{item.App__c}</div>
+                        </td>
+                        <td data-label="Technologies">
+                            <div class="slds-truncate" title="Cloudhub" data-id={indx}>{item.Technologies__c}</div>
+                        </td>
+                        <td>
+                            <lightning-icon   
+                                icon-name="utility:edit"
+                                data-id={indx}       
+                                alternative-text="Edit"     
+                                size="x-small"
+                                onclick={editRow} 
+                                title="Edit">
+                            </lightning-icon>
+                            &ensp;&ensp;
+                            <lightning-icon   
+                                icon-name="utility:delete"
+                                data-id={indx}       
+                                alternative-text="Delete"     
+                               size="x-small"
+                                onclick={removeRow} 
+                                title="Delete">
+                            </lightning-icon>
+                        </td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+    </div>
+    </lightning-card>
+   </div>
+    
+   <!-- FileUpload -->
+   <div  class="slds-var-p-around_large">
+    <lightning-card >
+        <div class="slds-box slds-var-p-top_small" style="background-color: white; position: relative;">
+            <template if:true={showSpinner} >
+                <lightning-spinner alternative-text="Loading" size="medium" class="spinnerClass"></lightning-spinner>
+            </template>
+            <div class="slds-text-heading_medium">Multiple Files Upload</div>
+            <lightning-input type="file"
+                             label="Attachment"
+                             onchange={handleFileUploaded}
+                             multiple> 
+            </lightning-input>
+            <template if:true={filesData}>
+                <template for:each={filesData} for:item="imgName" for:index="index">
+                    {imgName.fileName}
+                    <span key={imgName.fileName} data-id={index} onclick={removeReceiptImage} class="removeImage">x</span>
+                </template>
+            </template>
+            
+        </div>
+    </lightning-card>
+  </div>
+
+<div  class="slds-var-p-around_large slds-text-align_right" style="padding-right:2%">
+        <lightning-button label="Save" onclick={saveMe} variant="brand" ></lightning-button>&nbsp;
+        <lightning-button label="Cancel" onclick={cancelMe}  variant="brand"></lightning-button>
+</div>
+</template> 

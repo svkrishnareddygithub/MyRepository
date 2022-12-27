@@ -1,0 +1,15 @@
+<template>
+    <lightning-card title="Lightning_Record_Edit_Form">
+        <lightning-record-edit-form record-id={recordId} object-api-name="Account">
+            <lightning-input-field field-name="Name"></lightning-input-field>
+            <lightning-input-field field-name="Rating"></lightning-input-field>
+            <lightning-input-field field-name="Phone" ></lightning-input-field>
+            <lightning-button   type="submit"  label="Update"></lightning-button>
+            <lightning-button   label="reset" onclick={reset}></lightning-button>
+        </lightning-record-edit-form>
+        
+            
+            
+        
+    </lightning-card>
+</template>

@@ -1,0 +1,112 @@
+ /* Logo buttons styling */
+.btn {
+  background-color: #ba0517;
+  /* padding:-50%; */
+  margin: 2px;
+  border: none;
+  /* position: absolute; */
+  height:16%;
+  width: 60%;
+}
+/*previous and next buttons styling */
+.buttons{
+    position: fixed;
+    
+    left: 45%;
+    font-size: 18px;
+    /* position: static; */
+    bottom: 2%;
+}
+
+/* Logo styling for the template */
+.down{
+  width: 70%;
+  height: 70%;
+  background: rgb(0,22,57);
+  border:2px solid #ba0517;
+  border-radius: 50%;
+}
+
+/* For First line */
+.line1{
+  position: absolute;
+  top: 9%; left: 41%; right: 51%; bottom: 77%;
+  border:3px dashed #49040bc0;
+  border-width: 3px 0 0 3px ;
+}
+.line1:after{
+  content: '';
+  width: 0; 
+  height: 0; 
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 8px solid #49040bc0;
+  position: absolute;
+  right: -10px;
+  top: -15px;
+  margin-top: 5px;
+}
+/* Also for firstline */
+.line2{
+  position: absolute;
+  top: 23%; left: 34%; right: 59%; bottom: 11%;
+  border:3px dashed #49040bc0;
+  border-width: 3px 0 0 0 ;
+}
+
+/* For second line */
+.line3{
+  position: absolute;
+  top: 49%; left: 36%; right: 51%; bottom: 50%;
+  border:3px dashed #49040bc0;
+  border-width: 3px 0 0 0 ;
+}
+.line3:after{
+  content: '';
+  width: 0; 
+  height: 0; 
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 8px solid #49040bc0;
+  position: absolute;
+  right: -10px;
+  top: -15px;
+  margin-top: 5px;
+}
+
+/* For third line */
+.line4{
+  position: absolute;
+  top: 77%; left: 41%; right: 51%; bottom: 9%;
+  border:3px dashed #49040bc0;
+  border-width: 0 0 3px 3px ;
+}
+.line4:after{
+  content: '';
+  width: 0; 
+  height: 0; 
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 8px solid #49040bc0;
+  position: absolute;
+  right: -10px;
+  /* top: 10px; */
+  margin-top: 19%;
+}
+/* Also for third line */
+.line5{
+  position: absolute;
+  top: 74%; left: 34%; right: 59%; bottom: 11%;
+  border:3px dashed #49040bc0;
+  border-width: 3px 0 0 0 ;
+}
+
+.buttonsExecept1st{
+
+  width: 50%;
+  height:35px;
+  border:2px solid rgb(131, 43, 43);
+  text-align: center;
+  border-radius:6px;
+  margin-top:7%
+}

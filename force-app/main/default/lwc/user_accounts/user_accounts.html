@@ -1,0 +1,27 @@
+<template>
+    <lightning-card>  
+    <div class="slds-p-around_x-large" style="border:1px solid black">
+        <span style="font-size:20px ;">User List</span>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>UserName</th>
+                    <th>Id</th>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={usersdata} for:item="u">
+                    <tr key={u.id}>
+                    <td><span onclick={handleClick} key={u.Id}><a title={u.Id}>{u.Name}</a></span></td>
+                    <td>{u.Username}</td>
+                    <td>{u.Id}</td>
+                    </tr>
+                </template> 
+            </tbody>
+        </table> 
+    </div >
+         <span style="font-size:20px ;">Account List</span>
+        <lightning-datatable key-field="Id" data={accountsdata} columns={coll} ></lightning-datatable>
+    </lightning-card>
+</template>

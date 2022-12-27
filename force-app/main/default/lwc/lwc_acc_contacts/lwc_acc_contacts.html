@@ -1,0 +1,7 @@
+<template>
+    <lightning-card title="Enter Acc Name">
+        <lightning-input label="AccName" onchange={captureAcc}></lightning-input>
+        <lightning-datatable key-field="Id" columns={col} data={krishna.data}></lightning-datatable>
+        <lightning-button label="Search" onclick={search}></lightning-button>
+    </lightning-card>
+</template>
