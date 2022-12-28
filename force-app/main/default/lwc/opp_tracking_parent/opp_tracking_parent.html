@@ -1,11 +1,11 @@
 <template>
- 
-    <div  style="padding: 15px 50px 40px 20px;">
-        <span style="float:left;font-size: 20px;"> Opportunities Tracking (Create)</span>
-        <span style="float:right;font-size: 15px;">Date Created : {today}&ensp;<lightning-icon size="small" icon-name="action:back"></lightning-icon></span>
+<lightning-card>
+    <div  style="padding: 15px 50px 40px 20px;background-color:#0d5ed8;margin-left:10px;margin-right:10px;border-radius:5px">
+        <span style="float:left;font-size: 20px;color:white"> Opportunities Tracking (Create)</span>
+        <span style="float:right;font-size: 15px;color:white">Date Created : {today}&ensp;<lightning-button-icon size="large" onclick={backbuttonn} icon-name="action:back" variant="brand"></lightning-button-icon></span>
     </div>
  
-    <div class="slds-p-around_large">
+    <div class="slds-var-p-around_large">
       <lightning-card >
 
         <div class="slds-var-p-horizontal_medium">
@@ -290,4 +290,5 @@
         <lightning-button label="Save" onclick={saveMe} variant="brand" ></lightning-button>&nbsp;
         <lightning-button label="Cancel" onclick={cancelMe}  variant="brand"></lightning-button>
 </div>
+</lightning-card>
 </template> 

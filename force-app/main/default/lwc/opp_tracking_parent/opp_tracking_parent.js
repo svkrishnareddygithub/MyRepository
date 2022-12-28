@@ -358,10 +358,11 @@ export default class Opp_tracking_parent extends NavigationMixin(LightningElemen
                         this.showToast('Success', 'success', 'Record was created successfully.');
 
                 }).catch(error=>{
-                   alert('failed parent:' +error.body.message);
+                    this.showToast('Parent Record creation Failed');
                 });
             }else{
-              alert('Enter CustomerName');
+            //   alert('Enter CustomerName');
+              this.showToast('Enter CustomerName');
             }
         }
 
@@ -501,6 +502,18 @@ export default class Opp_tracking_parent extends NavigationMixin(LightningElemen
 
     cancelMe(){
         location.reload();
+    }
+    backbuttonn(){
+        this[NavigationMixin.Navigate]({
+            type: 'standard__objectPage',   
+            attributes: {
+                objectApiName: 'Opportunity_Track__c',
+                actionName: 'list'
+            },
+            state: {       
+                filterName: 'All' 
+            }
+        });
     }
 
 }
