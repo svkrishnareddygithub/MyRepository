@@ -1,5 +1,6 @@
 public class AccouuntShare {
     /*
+    farheen testing
     public static void accShare(List<Account> accList){
         List<AccountShare> share=new List<AccountShare>();
         User u=[select id,name from User where name='Anji'];
