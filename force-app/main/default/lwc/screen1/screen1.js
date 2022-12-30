@@ -1,4 +1,4 @@
-import { LightningElement } from 'lwc';
+import { LightningElement,track } from 'lwc';
 import allLogos from '@salesforce/resourceUrl/allLogos';
 import Arrows from '@salesforce/resourceUrl/Arrows';
 import { createRecord } from 'lightning/uiRecordApi';
@@ -40,10 +40,13 @@ export default class Screen1 extends LightningElement {
     button5;
     button6;
 
+    navigationValue;
+
     hidePrevious=true;
     hideNext=false;      
     //unit selection onclick function
     unithandler() {
+        this.navigationValue=1;
         this.button1 = this.template.querySelector("button[data-my-id=unitid]");
         //passing this button id to the called function
         this.selectedbutton(this.button1);
@@ -56,6 +59,7 @@ export default class Screen1 extends LightningElement {
     }
     //company onclick function
     companyhandler() {
+        this.navigationValue=2;
         this.button2 = this.template.querySelector("button[data-my-id=companyid]");
         this.selectedbutton(this.button2);
         this.companysource = this.company1;
@@ -70,6 +74,7 @@ export default class Screen1 extends LightningElement {
     }
     //gauge meter onclick function
     gaugehandler() {
+        this.navigationValue=3;
         this.button3 = this.template.querySelector("button[data-my-id=gaugeid]");
         this.selectedbutton(this.button3);
         this.gaugesource = this.gauge1;
@@ -84,6 +89,7 @@ export default class Screen1 extends LightningElement {
     }
     //cart button onclick function
     carthandler() {
+        this.navigationValue=4;
         this.button4 = this.template.querySelector("button[data-my-id=cartid]");
         this.selectedbutton(this.button4);
         this.cartsource = this.cart1;
@@ -98,6 +104,7 @@ export default class Screen1 extends LightningElement {
     }
     //trolley button onclick function
     trolleyhandler() {
+        this.navigationValue=5;
         this.button5 = this.template.querySelector("button[data-my-id=trolleyid]");
         this.selectedbutton(this.button5);
         this.companyflag = false;
@@ -113,7 +120,8 @@ export default class Screen1 extends LightningElement {
     //truck button onclick function
     click = 0;
     truckhandler() {
-        this.click = '1'
+        this.navigationValue=6;
+        // this.click = '1'
         this.button6 = this.template.querySelector("button[data-my-id=truckid]");
         this.selectedbutton(this.button6);
         this.trucksource = this.truck1;
@@ -126,14 +134,48 @@ export default class Screen1 extends LightningElement {
         this.hidePrevious=false;
         this.hideNext=true;
     }
+
+    @track isSpinner = false;
+    temp=1;
+    renderedCallback()
+    {
+        if(this.template.querySelector("button[data-my-id=unitid]") && this.temp==1)
+        {
+            
+            this.template.querySelector("button[data-my-id=unitid]").click();
+            this.temp=2;
+        }
+        // this.unithandler();
+    }
     //next button handler
     nextHandler() {
-        if (this.click == 1) {
-            if (this.button6) {
-                this.commoncode(this.button6);
-                this.trucksource = this.truck1;
-            }
+        if(this.navigationValue==1)
+        {
+            this.template.querySelector("button[data-my-id=companyid]").click();
+
         }
+        else if(this.navigationValue==2)
+        {
+            this.template.querySelector("button[data-my-id=gaugeid]").click();
+
+        }
+        else if(this.navigationValue==3)
+        {
+        this.template.querySelector("button[data-my-id=cartid]").click();
+            
+        }
+        else if(this.navigationValue==4)
+        {
+            this.template.querySelector("button[data-my-id=trolleyid]").click();
+        }
+        else if(this.navigationValue==5)
+        {
+            this.template.querySelector("button[data-my-id=truckid]").click();
+        }
+
+    }
+
+    prevHandler(){
 
     }
 
@@ -196,7 +238,7 @@ export default class Screen1 extends LightningElement {
             this.deslectButtons();
         }
     }
-    deliveryUnit() {
+    deliveryUnit(){
         if (this.btn3 == null) {
             this.selectButtons();
             this.btnValue = this.btn3.value;
